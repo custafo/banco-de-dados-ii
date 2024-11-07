@@ -1,7 +1,10 @@
+
 from sqlalchemy import create_engine, text, URL
-from sqlalchemy.exc import SQLAlchemyError
-from functions import drop_database, create_database, database_exists
+from sqlalchemy.exc import SQLAlchemyError, ProgrammingError
+
+from functions import drop_database, create_database
 from selects_inserts import *
+from menu import main_menu
 
 #checar se banco existe com root engine, inicializar o banco caso não exista
 #sistema possuirá funcionalidades descritas no requerimento de projeto
@@ -13,26 +16,20 @@ url_object = URL.create(
     password="Usuario123",
     host="localhost"
 )
+
+
 engine = create_engine(url_object)
 
-print(database_exists(engine))
 
-
-drop_database(engine)
 
 try:
     create_database(engine)
-    print()
 
 except SQLAlchemyError as e:
-    print("erro:", e)
+    pass
 
 else:
-    print("database created")
+    print("base de dados restaurante não encontrado, criando database.")
 
-insert_cliente(engine, "Breno", "m", "31", "1993-07-09", "0")
 
-rows = select_venda(engine)
-print(rows)
-
-print("REACHED EOF")
+main_menu(engine)
