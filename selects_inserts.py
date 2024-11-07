@@ -1,5 +1,53 @@
 from sqlalchemy import create_engine, text, URL
 
+
+def call_function_calcular_pontos(engine, purchase_amount):
+
+    with engine.connect() as connection:
+        query = text("SELECT calcular_pontos(:purchase_amount)")
+        params = {"purchase_amount": purchase_amount}
+        result = connection.execute(query, params)
+        calculated_amount = result.fetchall()
+        return calculated_amount
+
+
+
+def call_procedure_estatisticas(engine):
+
+    with engine.connect() as connection:
+        query = text("CALL estatisticas()")
+        connection.execute(query)
+        connection.commit()
+
+
+def call_procedure_gastar_pontos(engine, cliente_id: int, prato_id: int):
+
+    with engine.connect() as connection:
+        query = text("CALL gastar_pontos(:cliente_id, :prato_id)")
+        params = {"cliente_id": cliente_id, "prato_id": prato_id}
+        connection.execute(query, params)
+        connection.commit()
+
+
+
+def call_procedure_reajuste(engine, porcentagem):
+
+    with engine.connect() as connection:
+        query = text("CALL reajuste(:porcentagem)")
+        params = {"porcentagem": porcentagem}
+        connection.execute(query, params)
+        connection.commit()
+
+
+def call_procedure_sorteio(engine):
+
+    with engine.connect() as connection:
+        query = text("CALL sorteio()")
+        connection.execute(query)
+        connection.commit()
+    
+
+        
 def select_view_ingrediente_mais_usado(engine):
 
     with engine.connect() as connection:
