@@ -1,6 +1,132 @@
 from sqlalchemy import create_engine, text, URL
 
 
+def update_venda(engine, id_cliente, id_prato,  quantidade, dia,  hora,  valor):
+
+    query = text("UPDATE venda SET id_cliente = :id_cliente,  id_prato = :id_prato, quantidade = :quantidade, dia = :dia, hora = :hora, valor = :valor WHERE id_cliente = :id_cliente AND id_prato = :id_prato;")
+    params = {"id_cliente": id_cliente, "id_prato": id_prato, "quantidade": quantidade, "dia": dia, "hora": hora, "valor": valor}
+    
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+
+def update_usos(engine, id_prato, id_ingrediente):
+
+    query = text("UPDATE usos SET id_prato = :id_prato, id_ingrediente = :id_ingrediente WHERE id_prato = :id_prato AND id_ingrediente = :id_ingrediente ;")
+    params = {"id_prato": id_prato, "id_ingrediente": id_ingrediente}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+
+def update_ingrediente(engine, id, nome, data_fabricacao, data_validade, quantidade, observacao):
+
+    query = text("UPDATE ingrediente SET nome = :nome, data_fabricacao = :data_fabricacao, data_validade = :data_validade, quantidade = :quantidade, observacao = :observacao WHERE id = :id;")
+    params = {"nome": nome, "data_fabricacao": data_fabricacao, "data_validade": data_validade, "quantidade": quantidade, "observacao": observacao, "id": id}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+def update_fornecedor(engine, id, nome, estado_origem):
+
+    query = text("UPDATE fornecedor SET nome = :nome, estado_origem = :estado_origem WHERE id = :id;")
+    params = {"nome": nome, "estado_origem": estado_origem, "id": id}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+
+def update_prato(engine, id, nome, descricao, valor, disponibilidade):
+
+    query = text("UPDATE prato SET nome = :nome, descricao = :descricao, valor = :valor, disponibilidade = :disponibilidade WHERE id = :id;")
+    params = {"nome": nome, "descricao": descricao, "valor": valor, "disponibilidade": disponibilidade, "id": id }
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+
+def update_cliente(engine, id, nome, sexo, idade, nascimento, pontos):
+
+    query = text("UPDATE cliente SET nome = :nome, sexo = :sexo, idade = :idade, nascimento = :nascimento, pontos = :pontos WHERE id = :id;")
+    params = {"nome": nome, "sexo": sexo, "idade": idade, "nascimento": nascimento, "pontos": pontos, "id": id}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+
+def delete_venda(engine, id_cliente, id_prato):
+
+    query = text("DELETE FROM venda WHERE id_cliente = :id_cliente AND id_prato = :id_prato")
+    params = {"id_cliente": id_cliente, "id_prato": id_prato }
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+
+def delete_usos(engine, id_prato, id_ingrediente):
+
+    query = text("DELETE FROM usos WHERE id_prato = :id_prato AND id_ingrediente = :id_ingrediente")
+    params = {"id_prato": id_prato, "id_ingrediente": id_ingrediente}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+def delete_ingrediente(engine, id):
+
+    query = text("DELETE FROM ingrediente WHERE id = :id")
+    params = {"id": id}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+def delete_fornecedor(engine, id):
+
+    query = text("DELETE FROM fornecedor WHERE id = :id")
+    params = {"id": id}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+def delete_prato(engine, id):
+
+    query = text("DELETE FROM prato WHERE id = :id")
+    params = {"id": id}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
+def delete_cliente(engine, id):
+
+    query = text("DELETE FROM cliente WHERE id = :id")
+    params = {"id": id}
+
+    with engine.connect() as connection:
+
+            connection.execute(query, params)
+            connection.commit()
+
 def call_function_calcular_pontos(engine, purchase_amount):
 
     with engine.connect() as connection:
