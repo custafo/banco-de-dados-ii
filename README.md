@@ -1,5 +1,10 @@
 # banco-de-dados-ii
 
+# Equipe:
+- Breno Pedrosa
+- Gustavo Lima
+- Luis Gustavo
+- Renata Bezerra
 # Sistema de Banco de Dados para Restaurante
 
 ## Linguagem
