@@ -26,8 +26,5 @@ BEGIN
         SET pontos = nova_pontuacao
         WHERE id = cliente_id;
 
-        SELECT 'Compra realizada com sucesso!' AS mensagem, nova_pontuacao AS pontos_restantes;
-    ELSE
-        SELECT 'Pontos insuficientes para a compra.' AS mensagem, pontos_cliente AS pontos_disponiveis;
     END IF;
 END;

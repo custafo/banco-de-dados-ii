@@ -1,5 +1,5 @@
 
-CREATE FUNCTION calculate_points(purchase_amount DECIMAL(10, 2))
+CREATE FUNCTION calcular_pontos(purchase_amount DECIMAL(10, 2))
 RETURNS INT 
 DETERMINISTIC 
 BEGIN
